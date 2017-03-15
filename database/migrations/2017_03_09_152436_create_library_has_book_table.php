@@ -13,14 +13,13 @@ class CreateLibraryHasBookTable extends Migration
      */
     public function up()
     {
-        Schema::create('library_has_book',function(Blueprint $table)){
-          $table->integer('idlibrary');
-          $table->integer('iduser');
-          $table->integer('idbook');
-          $table->primary('idlibrary', 'iduser', 'idbook');
-          $table->foreign('idlibrary')->references('idlibrary')->on('library');
+        Schema::create('library_has_book',function(Blueprint $table){
+          $table->unsignedInteger('library_id');
+          $table->unsignedInteger('book_id');
+          $table->foreign('library_id')->references('id')->on('library')->onDelete('cascade');
+          $table->foreign('book_id')->references('id')->on('book')->onDelete('cascade');
           $table->timestamps();
-        }
+        });
     }
 
     /**

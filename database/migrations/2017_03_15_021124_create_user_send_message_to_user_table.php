@@ -14,17 +14,15 @@ class CreateUserSendMessageToUserTable extends Migration
     public function up()
     {
         Schema::create('user_send_message_to_user', function(Blueprint $table){
-          $table->integer('id_sender')->unsigned();
-          $table->integer('id_receiver')->unsigned();
+          $table->unsignedInteger('idsender');
+          $table->unsignedInteger('idreceiver');
           $table->longText('message_content');
-          $table->time('create_time');
-          $table->integer('idmessage');
-          $table->primary('id_sender', 'id_receiver', 'idmessage');
-          $table->foreign('id_sender')
-              ->references('iduser')->on('user');
+          $table->increments('id');
+          $table->foreign('idsender')
+              ->references('id')->on('user');
 
-          $table->foreign('id_receiver')
-              ->references('iduser')->on('user');
+          $table->foreign('idreceiver')
+              ->references('id')->on('user');
 
           $table->timestamps();
 

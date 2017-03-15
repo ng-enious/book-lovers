@@ -13,12 +13,13 @@ class CreateFriendsListTable extends Migration
      */
     public function up()
     {
-        schema::create('friends_list', function(Blueprint $table)){
-          $table->increment('idfriends_list');
-          $table->integer('listNbre')->nullable();
-          $table->enum('');
+        schema::create('friends_list', function(Blueprint $table){
+          $table->unsignedInteger('user_id');
+          $table->unsignedInteger('user_id_friend');
+          $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
+          $table->foreign('user_id_friend')->references('id')->on('user')->onDelete('cascade');
           $table->timestamps();
-        }
+        });
     }
 
     /**
@@ -28,6 +29,6 @@ class CreateFriendsListTable extends Migration
      */
     public function down()
     {
-        schema::dropIfExists('friends_list');
+        schema::dropIfExists('user_has_user');
     }
 }

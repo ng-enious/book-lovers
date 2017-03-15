@@ -14,20 +14,14 @@ class CreatePublicationTable extends Migration
     public function up()
     {
         Schema::create('publication', function(Blueprint $table){
-          $table->integer('idpublication');
-          $table->mediumText('type')->nullable();
-          $table->integer('iduser')->unsigned();
-          $table->integer('idbook')->unsigned();
-          $table->mediumText('duration')->nullable();
-          $table->date('StartDate')->nullable();
-          $table->date('finishDate')->nullable();
+          $table->increments('id');
+          $table->unsignedInteger('user_id');
+          $table->unsignedInteger('book_id');
+          $table->foreign('user_id')
+              ->references('id')->on('user')->onDelete('cascade');
 
-          $table->primary('idpublication', 'iduser', 'idbook');
-          $table->foreign('iduser')
-              ->references('iduser')->on('user');
-
-          $table->foreign('idbook')
-              ->references('idbook')->on('book');
+          $table->foreign('book_id')
+              ->references('id')->on('book')->onDelete('cascade');
 
           $table->timestamps();
 		

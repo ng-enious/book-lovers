@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserFollowBookTable extends Migration
+class CreateUserSalesBookTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateUserFollowBookTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_follow_book', function(Blueprint $table){
+        Schema::create('user_sales_book', function(Blueprint $table){
+          $table->increments('id');
           $table->unsignedInteger('user_id');
           $table->unsignedInteger('book_id');
-          $table->foreign('user_id')
-              ->references('id')->on('user')->onDelete('cascade');
-
-          $table->foreign('book_id')
-              ->references('id')->on('book')->onDelete('cascade');
-
+          $table->double('price');
+          $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
+          $table->foreign('book_id')->references('id')->on('book')->onDelete('cascade');
           $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ class CreateUserFollowBookTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_follow_book');
+        Schema::dropIfExists('user_sales_book');
     }
 }

@@ -14,12 +14,12 @@ class CreateLibraryTable extends Migration
     public function up()
     {
         Schema::create('library', function(Blueprint $table) {
-          $table->increments('idlibrary');
-          $table->integer('iduser');
-          $table->foreign('iduser')->references('iduser')->on('user');
-          $table->primary('idlibrary','iduser');
+          $table->increments('id');
+          $table->unsignedInteger('user_id');
+          $table->binary('cover')->nullable();
+          $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
           
-        }
+        });
     }
 
     /**

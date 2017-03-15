@@ -13,19 +13,18 @@ class CreateUserFavoriteBookTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_favorise_book', function(Blueprint $table)){
-          $table->integer('iduser')->unsigned();
-          $table->integer('idbook')->unsigned();
-          $table->primary('iduser', ' idbook');
-          $table->foreign('iduser')
-              ->references('iduser')->on('user');
+        Schema::create('user_favorise_book', function(Blueprint $table){
+          $table->unsignedInteger('user_id');
+          $table->unsignedInteger('book_id');
+          $table->foreign('user_id')
+              ->references('id')->on('user')->onDelete('cascade');
 
-          $table->foreign('idbook')
-              ->references('idbook')->on('book');
+          $table->foreign('book_id')
+              ->references('id')->on('book')->onDelete('cascade');
 
           $table->timestamps();
 		
-        }
+        });
     }
 
     /**

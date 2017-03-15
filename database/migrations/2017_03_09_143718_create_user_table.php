@@ -13,11 +13,11 @@ class CreateUserTable extends Migration
      */
     public function up()
     {
-        schema::create('user', function(Blueprint $table)){
-          $table->increments('iduser');
+        schema::create('user', function(Blueprint $table){
+          $table->increments('id');
           $table->mediumtext('name');
           $table->mediumtext('password');
-          $table->mediumtext('email')->unique();
+          $table->string('email');
           $table->Date('date_birth');
           $table->longtext('adress');
           $table->integer('postal_code');
@@ -27,9 +27,8 @@ class CreateUserTable extends Migration
           $table->binary('photo')->nullable();
           $table->rememberToken();
           $table->timestamps();
-          $table->foreign('id_friends_list')->references('id_friends_list')->on('friends_list') ; 
+        });
     }
-
     /**
      * Reverse the migrations.
      *

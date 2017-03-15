@@ -13,14 +13,15 @@ class CreateBookTable extends Migration
      */
     public function up()
     {
-        schema::create('book', function(Blueprint $table)){
-          $table->increment('idbook');
+        schema::create('book', function(Blueprint $table){
+          $table->increments('id');
           $table->mediumtext('title');
           $table->mediumtext('isbn');
           $table->mediumtext('auteur');
           $table->mediumtext('genre');
+          $table->binary('cover')->nullable();
           $table->mediumtext('description')->nullable();
-        }
+        });
     }
 
     /**

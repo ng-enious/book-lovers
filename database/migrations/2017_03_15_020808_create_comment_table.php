@@ -14,18 +14,15 @@ class CreateCommentTable extends Migration
     public function up()
     {
         Schema::create('comment', function(Blueprint $table){
-          $table->integer('idcomment');
-          $table->longText('commentContent')->nullable();
-          $table->time('create_time')->nullable();
-          $table->integer('iduser')->unsigned();
-          $table->integer('idbook')->unsigned();
+          $table->increments('id');
+          $table->longText('commentContent');
+          $table->unsignedInteger('user_id');
+          $table->unsignedInteger('book_id');
+          $table->foreign('user_id')
+              ->references('id')->on('user')->onDelete('cascade');
 
-          $table->primary('idcomment', 'iduser', 'idbook');
-          $table->foreign('iduser')
-              ->references('iduser')->on('user');
-
-          $table->foreign('idbook')
-              ->references('idbook')->on('book');
+          $table->foreign('book_id')
+              ->references('id')->on('book')->onDelete('cascade');
 
           $table->timestamps();
         });
