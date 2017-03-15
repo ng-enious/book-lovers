@@ -16,6 +16,7 @@ class CreateFriendsListTable extends Migration
         schema::create('friends_list', function(Blueprint $table)){
           $table->increment('idfriends_list');
           $table->integer('listNbre')->nullable();
+          $table->enum('');
           $table->timestamps();
         }
     }
